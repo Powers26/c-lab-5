@@ -8,8 +8,6 @@
 int RNG(int m);
 //This is the menu that takes user inputs and compares it to the random num
 void playMenu();
-//compares the guess to the random number
-void guessCheck(int num, int guess);
 //ends the game if the guess is correct
 void win();
 //prints a loss message if user does noot guess correctly
@@ -45,31 +43,27 @@ void playMenu()
     int num = RNG(100);
     int i;
 
-    for(i = 0; i < 20 - 1; i++)
+    for(i = 1; i < 20; i++)
     {
-            guessCheck(num, guess);
-    }
-    
-    if(guess != num)
-        {
-            loss();
-        }
-        else if(guess == num && i == 20)
-        {
-            win();
-        }
-}
-
-void guessCheck(int num, int guess)
-{
+        std::cin >> guess;
         if(guess == num)
         {
             win();
+            break;
         }
-        else
+    else
         {
             std::cout << "Not quite! Try again!" << std::endl;
-            std::cin >> guess;
+        }
+    }
+    
+    if(guess == num && i == 20)
+        {
+            win();
+        }
+    else if (i == 20)
+        {
+            loss();
         }
 }
 
