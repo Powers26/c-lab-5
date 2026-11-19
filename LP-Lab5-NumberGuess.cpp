@@ -5,6 +5,8 @@
 #include <string>
 
 //declare Random Number Generator
+//Takes an int for the range of the random number
+//Returns a random int
 int RNG(int m);
 //This is the menu that takes user inputs and compares it to the random num
 void playMenu();
@@ -13,11 +15,14 @@ void win();
 //prints a loss message if user does noot guess correctly
 void loss();
 //Asks user if they want to play again, and ends or repeats program depending on answer
+//prompts user for input
+//returns a boolean
 bool playAgain();
 
 
 int main()
 {
+    srand(time(NULL));
     do
     {
         std::cout << "I will pick a random number between 1 and 100, and you try to guess it!" << std::endl;
@@ -31,7 +36,6 @@ int main()
 
 int RNG(int m)
 {
-    srand(time(NULL));
     int ranNum = rand() % m + 1;
     return ranNum;
 }
@@ -45,16 +49,16 @@ void playMenu()
 
     for(i = 1; i < 20; i++)
     {
-        std::cin >> guess;
         if(guess == num)
         {
             win();
             break;
         }
-    else
+        else
         {
             std::cout << "Not quite! Try again!" << std::endl;
         }
+        std::cin >> guess;
     }
     
     if(guess == num && i == 20)
@@ -137,6 +141,7 @@ bool playAgain()
         break;
         default : std::cout << "Invalid Input" << std::endl;
         again = false;
+        break;
     }
     return again;
 }
